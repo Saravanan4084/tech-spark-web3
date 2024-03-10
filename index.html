@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Record System</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        body {
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Health Record System</h1>
+
+        <!-- Update Patient Data Form -->
+        <div class="mt-4">
+            <h2>Update Patient Data</h2>
+            <form id="updateForm">
+                <div class="mb-3">
+                    <label for="newData" class="form-label">New Data:</label>
+                    <input type="text" class="form-control" id="newData" required>
+                </div>
+                <button type="button" class="btn btn-primary" onclick="updateRecord()">Update Record</button>
+            </form>
+        </div>
+
+        <!-- Patient Information -->
+        <div class="mt-4">
+            <h2>Patient Information</h2>
+            <div id="patientInfo"></div>
+        </div>
+
+        <!-- Version History -->
+        <div class="mt-4">
+            <h2>Version History</h2>
+            <ul id="versionHistory" class="list-group"></ul>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom JavaScript -->
+    <script>
+        // Mock patient data for demonstration purposes
+        const patientData = {
+            name: "John Doe",
+            age: 30,
+            gender: "Male",
+            history: [
+                { timestamp: "2022-01-01", data: "Initial data", updatedBy: "Admin" },
+                { timestamp: "2022-02-01", data: "Updated data", updatedBy: "Doctor A" }
+            ]
+        };
+
+        // Function to update patient record (Mock function)
+        function updateRecord() {
+            const newData = document.getElementById("newData").value;
+            // Mock function for updating patient data
+            console.log(`Updating patient record with new data: ${newData}`);
+            // You would call a function to update the data on the blockchain here
+        }
+
+        // Function to display patient information and version history
+        function displayPatientInfo() {
+            const patientInfoDiv = document.getElementById("patientInfo");
+            const versionHistoryList = document.getElementById("versionHistory");
+
+            // Display patient information
+            patientInfoDiv.innerHTML = `
+                <p><strong>Name:</strong> ${patientData.name}</p>
+                <p><strong>Age:</strong> ${patientData.age}</p>
+                <p><strong>Gender:</strong> ${patientData.gender}</p>
+            `;
+
+            // Display version history
+            versionHistoryList.innerHTML = "";
+            patientData.history.forEach(entry => {
+                const listItem = document.createElement("li");
+                listItem.className = "list-group-item";
+                listItem.innerHTML = `
+                    <strong>${entry.timestamp}</strong> - ${entry.data} (Updated by ${entry.updatedBy})
+                `;
+                versionHistoryList.appendChild(listItem);
+            });
+        }
+
+        // Initial display when the page loads
+        window.onload = function() {
+            displayPatientInfo();
+        };
+    </script>
+</body>
+</html>
